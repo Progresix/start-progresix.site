@@ -3,7 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bardianto | Pixel Direct & Support</title>
+    
+    <!-- SEO UTAMA -->
+    <title>Bagus Ardianto Adi Saputro | Profil Profesional</title>
+    <meta name="description" content="Profil resmi Bagus Ardianto Adi Saputro. Hubungi langsung untuk kolaborasi profesional dan dukungan proyek kreatif.">
+    <meta name="keywords" content="Bagus Ardianto, Bagus Ardianto Adi Saputro, Ardianto Adi, Profesional Indonesia, Portofolio Bagus Ardianto">
+    
+    <!-- JSON-LD: Schema Org (Penting untuk Google Search Console) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Bagus Ardianto Adi Saputro",
+      "alternateName": "Bagus Ardianto",
+      "url": "https://bardianto.com",
+      "jobTitle": "Professional Specialist",
+      "sameAs": [
+        "https://instagram.com/bagusardianto",
+        "https://linkedin.com/in/bagus-ardianto-adi-saputro"
+      ]
+    }
+    </script>
+
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -11,65 +32,15 @@
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
-        body {
-            background-color: #000;
-            font-family: 'JetBrains Mono', monospace;
-            margin: 0;
-            transition: color 0.3s ease;
-            -webkit-tap-highlight-color: transparent;
-        }
-        .pixel-border {
-            border: 3px solid currentColor;
-            box-shadow: 6px 6px 0px 0px currentColor;
-        }
-        .pixel-border:active {
-            transform: translate(3px, 3px);
-            box-shadow: 0px 0px 0px 0px currentColor;
-        }
-        .pixel-border-indigo {
-            border: 3px solid #6366f1;
-            box-shadow: 6px 6px 0px 0px #6366f1;
-        }
-        .pixel-border-indigo:active {
-            transform: translate(3px, 3px);
-            box-shadow: 0px 0px 0px 0px #6366f1;
-        }
-        .loading-spin {
-            width: 20px; height: 20px;
-            border: 3px solid rgba(255,255,255,0.2); border-top-color: currentColor;
-            border-radius: 50%; animation: spin 0.8s linear infinite;
-        }
+        body { background-color: #000; font-family: 'JetBrains Mono', monospace; margin: 0; -webkit-tap-highlight-color: transparent; overflow-x: hidden; }
+        .pixel-border { border: 3px solid currentColor; box-shadow: 6px 6px 0px 0px currentColor; }
+        .pixel-border:active { transform: translate(3px, 3px); box-shadow: 0px 0px 0px 0px currentColor; }
+        .pixel-border-indigo { border: 3px solid #6366f1; box-shadow: 6px 6px 0px 0px #6366f1; }
+        .pixel-border-indigo:active { transform: translate(3px, 3px); box-shadow: 0px 0px 0px 0px #6366f1; }
+        .loading-spin { width: 20px; height: 20px; border: 3px solid rgba(255,255,255,0.2); border-top-color: currentColor; border-radius: 50%; animation: spin 0.8s linear infinite; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
-        
-        .bg-overlay {
-            position: fixed;
-            inset: 0;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.85));
-            z-index: -1;
-        }
-
-        .modal-enter {
-            animation: modalFade 0.2s ease-out;
-        }
-        @keyframes modalFade {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        /* Hidden Login Trigger */
-        .hidden-admin-trigger {
-            position: fixed;
-            bottom: 10px;
-            left: 10px;
-            width: 40px;
-            height: 40px;
-            opacity: 0;
-            cursor: default;
-            z-index: 100;
-        }
-        .hidden-admin-trigger:hover {
-            opacity: 0.05;
-        }
+        .bg-overlay { position: fixed; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.9)); z-index: -1; }
+        .hidden-admin-trigger { position: fixed; bottom: 0; left: 0; width: 60px; height: 60px; opacity: 0; cursor: default; z-index: 100; }
     </style>
 </head>
 <body>
@@ -114,13 +85,12 @@
             const [view, setView] = useState('home'); 
             const [user, setUser] = useState(null);
             const [profile, setProfile] = useState({ 
-                name: '', bio: '', avatar_url: '', bg_url: '', text_color: '#ffffff' 
+                name: 'Bagus Ardianto Adi Saputro', bio: 'Professional Profile', avatar_url: '', bg_url: '', text_color: '#ffffff' 
             });
             const [links, setLinks] = useState([]);
             const [loading, setLoading] = useState(true);
             const [uploading, setUploading] = useState(null);
             const [saveStatus, setSaveStatus] = useState(null);
-
             const [showDonateModal, setShowDonateModal] = useState(false);
             const [donateAmount, setDonateAmount] = useState(10000);
 
@@ -147,22 +117,15 @@
             const handleFileChange = async (e, type) => {
                 const file = e.target.files[0];
                 if (!file || !user) return;
-
                 setUploading(type);
                 const fileExt = file.name.split('.').pop();
                 const fileName = `${user.id}/${type}_${Date.now()}.${fileExt}`;
-
                 try {
                     const { error: uploadError } = await supabaseClient.storage.from('avatars').upload(fileName, file);
                     if (uploadError) throw uploadError;
-
                     const { data: { publicUrl } } = supabaseClient.storage.from('avatars').getPublicUrl(fileName);
                     setProfile(prev => ({ ...prev, [type === 'avatar' ? 'avatar_url' : 'bg_url']: publicUrl }));
-                } catch (err) {
-                    alert("Gagal: " + err.message);
-                } finally {
-                    setUploading(null);
-                }
+                } catch (err) { alert(err.message); } finally { setUploading(null); }
             };
 
             const handleLogin = async (e) => {
@@ -173,56 +136,49 @@
                     password: e.target.password.value 
                 });
                 if (error) alert(error.message);
-                else {
-                    setUser(data.user);
-                    setView('admin');
-                }
+                else { setUser(data.user); setView('admin'); }
                 setLoading(false);
             };
 
             const saveProfile = async () => {
                 setSaveStatus('saving');
                 const { error } = await supabaseClient.from('profiles').upsert({ id: user.id, ...profile });
-                if (error) {
-                    alert(error.message);
-                    setSaveStatus(null);
-                } else {
-                    setSaveStatus('success');
-                    setTimeout(() => setSaveStatus(null), 2000);
-                }
+                if (error) { alert(error.message); setSaveStatus(null); } 
+                else { setSaveStatus('success'); setTimeout(() => setSaveStatus(null), 2000); }
             };
 
-            const handleDuitkuDonate = () => {
-                alert(`Duitku Gateway (Upcoming).\nNominal: Rp ${donateAmount.toLocaleString()}`);
-                setShowDonateModal(false);
-            };
-
-            if (loading && view === 'home') return <div className="h-screen flex items-center justify-center bg-black text-white font-bold tracking-widest italic">PIXEL_INITIALIZING...</div>;
+            if (loading && view === 'home') return <div className="h-screen flex items-center justify-center bg-black text-white font-bold tracking-widest italic">SABAR YA...</div>;
 
             const dynamicStyle = { color: profile.text_color || '#ffffff' };
 
             return (
                 <div className="min-h-screen" style={dynamicStyle}>
-                    {/* --- HOME VIEW --- */}
+                    {/* ELEMEN SEO TERSEMBUNYI (Standard Accessability) */}
+                    <div className="sr-only">
+                        <h1>Bagus Ardianto Adi Saputro</h1>
+                        <h2>Profil Resmi Bagus Ardianto</h2>
+                        <p>Halaman ini berisi informasi profesional dan cara menghubungi Bagus Ardianto Adi Saputro secara langsung.</p>
+                    </div>
+
                     {view === 'home' && (
                         <div className="max-w-md mx-auto pt-24 px-8 pb-32 flex flex-col items-center">
                             {profile.bg_url && (
                                 <>
-                                    <img src={profile.bg_url} className="fixed inset-0 w-full h-full object-cover -z-20 grayscale-[0.5]" />
+                                    <img src={profile.bg_url} className="fixed inset-0 w-full h-full object-cover -z-20 grayscale-[0.3]" alt="Background Bagus Ardianto" />
                                     <div className="bg-overlay" />
                                 </>
                             )}
                             
                             <div className="w-32 h-32 border-4 mb-8 bg-zinc-900 overflow-hidden pixel-border" style={{borderColor: profile.text_color}}>
                                 {profile.avatar_url ? (
-                                    <img src={profile.avatar_url} className="w-full h-full object-cover" />
+                                    <img src={profile.avatar_url} className="w-full h-full object-cover" alt="Avatar Bagus Ardianto" />
                                 ) : (
-                                    <div className="w-full h-full flex items-center justify-center opacity-30 italic text-[10px]">NO_IMG</div>
+                                    <div className="w-full h-full flex items-center justify-center opacity-30 italic text-[10px]">BAGUS_ARDIANTO</div>
                                 )}
                             </div>
 
-                            <h1 className="text-3xl font-black uppercase tracking-tighter mb-2 text-center">{profile.name || "BARDIANTO"}</h1>
-                            <p className="text-xs mb-12 text-center uppercase tracking-[0.4em] font-bold opacity-70">{profile.bio || "CREATIVE DIRECTOR"}</p>
+                            <h2 className="text-2xl font-black uppercase tracking-tighter mb-2 text-center">{profile.name || "Bagus Ardianto Adi Saputro"}</h2>
+                            <p className="text-[10px] mb-12 text-center uppercase tracking-[0.4em] font-bold opacity-70 italic">{profile.bio || "Professional Hub"}</p>
 
                             <div className="flex flex-wrap justify-center gap-5 mb-12">
                                 {links.filter(l => l.type === 'social').map(l => (
@@ -241,85 +197,65 @@
                                 ))}
                             </div>
 
-                            <button 
-                                onClick={() => setShowDonateModal(true)}
-                                className="w-full py-5 bg-indigo-600 pixel-border-indigo flex items-center justify-center gap-4 font-black text-sm uppercase text-white mb-16"
-                            >
-                                <Icons.Donate /> SUPPORT ME
+                            <button onClick={() => setShowDonateModal(true)} className="w-full py-5 bg-indigo-600 pixel-border-indigo flex items-center justify-center gap-4 font-black text-sm uppercase text-white mb-16">
+                                <Icons.Donate /> SUPPORT BAGUS
                             </button>
 
-                            {/* Hidden Access Trigger */}
                             <div className="hidden-admin-trigger" onClick={() => setView('login')}></div>
                         </div>
                     )}
 
-                    {/* --- DONASI MODAL --- */}
                     {showDonateModal && (
                         <div className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-6 backdrop-blur-lg">
-                            <div className="w-full max-w-xs pixel-border bg-zinc-900 p-8 modal-enter text-white">
-                                <h3 className="text-xl font-black uppercase italic border-b-2 border-white pb-3 mb-6 tracking-tighter text-white">Support Project</h3>
-                                <p className="text-[10px] text-zinc-500 font-bold uppercase mb-4">Pilih Nominal (Rp)</p>
+                            <div className="w-full max-w-xs pixel-border bg-zinc-900 p-8 text-white">
+                                <h3 className="text-xl font-black uppercase italic border-b-2 border-white pb-3 mb-6 tracking-tighter">Support Project</h3>
                                 <div className="grid grid-cols-2 gap-3 mb-8">
                                     {[10000, 25000, 50000, 100000].map(amt => (
-                                        <button 
-                                            key={amt}
-                                            onClick={() => setDonateAmount(amt)}
-                                            className={`p-3 border-2 font-black text-xs transition-colors ${donateAmount === amt ? 'bg-white text-black border-white' : 'border-zinc-800 text-zinc-400'}`}
-                                        >
+                                        <button key={amt} onClick={() => setDonateAmount(amt)} className={`p-3 border-2 font-black text-xs ${donateAmount === amt ? 'bg-white text-black border-white' : 'border-zinc-800 text-zinc-400'}`}>
                                             {amt.toLocaleString()}
                                         </button>
                                     ))}
                                 </div>
-                                <button 
-                                    onClick={handleDuitkuDonate}
-                                    className="w-full py-5 bg-indigo-600 text-white font-black uppercase text-xs pixel-border-indigo mb-4"
-                                >
-                                    PAYMENT
-                                </button>
-                                <button onClick={() => setShowDonateModal(false)} className="w-full text-[10px] font-bold text-zinc-500 hover:text-white uppercase tracking-widest">Batal</button>
+                                <button onClick={() => setShowDonateModal(false)} className="w-full py-5 bg-indigo-600 text-white font-black uppercase text-xs pixel-border-indigo mb-4">DONATE_NOW</button>
+                                <button onClick={() => setShowDonateModal(false)} className="w-full text-[10px] font-bold text-zinc-500 uppercase">CLOSE</button>
                             </div>
                         </div>
                     )}
 
-                    {/* --- LOGIN VIEW --- */}
                     {view === 'login' && (
                         <div className="h-screen flex items-center justify-center px-6 bg-black text-white">
                             <form onSubmit={handleLogin} className="w-full max-w-xs pixel-border p-10 bg-zinc-900 space-y-6">
-                                <h2 className="text-xl font-black uppercase italic border-b-2 border-white pb-3 tracking-tighter">Admin Access</h2>
+                                <h2 className="text-xl font-black uppercase italic border-b-2 border-white pb-3 tracking-tighter">Admin Auth</h2>
                                 <input name="email" type="email" placeholder="EMAIL" className="w-full bg-black border-2 border-zinc-800 p-4 text-xs outline-none focus:border-white" required />
                                 <input name="password" type="password" placeholder="PASSWORD" className="w-full bg-black border-2 border-zinc-800 p-4 text-xs outline-none focus:border-white" required />
-                                <button className="w-full py-4 bg-white text-black font-black uppercase text-xs">Akses Masuk</button>
-                                <button type="button" onClick={() => setView('home')} className="w-full text-[10px] font-bold opacity-40 uppercase">Kembali</button>
+                                <button className="w-full py-4 bg-white text-black font-black uppercase text-xs">LOG_IN</button>
+                                <button type="button" onClick={() => setView('home')} className="w-full text-[10px] font-bold opacity-40 uppercase">BACK</button>
                             </form>
                         </div>
                     )}
 
-                    {/* --- ADMIN VIEW --- */}
                     {view === 'admin' && (
                         <div className="max-w-5xl mx-auto py-16 px-6 bg-black text-white">
                             <div className="flex justify-between items-end mb-16 border-b-4 border-white pb-8">
-                                <div>
-                                    <h1 className="text-3xl font-black italic tracking-tighter uppercase">PIXEL_DASHBOARD</h1>
-                                    <p className="text-[10px] text-zinc-500 font-bold mt-2 tracking-widest">ENCRYPTED_SESSION</p>
-                                </div>
+                                <h1 className="text-3xl font-black uppercase italic tracking-tighter">DASHBOARD_BAGUS</h1>
                                 <div className="flex gap-4">
-                                    <button onClick={() => setView('home')} className="px-6 py-2 border-2 border-white font-black text-xs hover:bg-white hover:text-black transition-colors uppercase">Preview</button>
-                                    <button onClick={() => { supabaseClient.auth.signOut(); setView('home'); }} className="px-6 py-2 bg-red-600 font-black text-xs uppercase transition-opacity hover:opacity-80">Logout</button>
+                                    <button onClick={() => setView('home')} className="px-6 py-2 border-2 border-white font-black text-xs uppercase">Preview</button>
+                                    <button onClick={() => { supabaseClient.auth.signOut(); setView('home'); }} className="px-6 py-2 bg-red-600 font-black text-xs uppercase">Logout</button>
                                 </div>
                             </div>
 
                             <div className="grid lg:grid-cols-2 gap-20">
                                 <div className="space-y-12">
                                     <div className="space-y-6">
-                                        <h3 className="text-xs font-black uppercase tracking-widest text-zinc-500 border-l-4 border-indigo-600 pl-4">Media Galeri</h3>
+                                        <h3 className="text-xs font-black uppercase tracking-widest text-zinc-500 border-l-4 border-indigo-600 pl-4">Aset Media</h3>
                                         <div className="grid grid-cols-2 gap-6">
                                             <div className="space-y-3">
                                                 <div className="aspect-square border-2 border-zinc-800 bg-zinc-900 overflow-hidden relative">
                                                     {profile.avatar_url && <img src={profile.avatar_url} className="w-full h-full object-cover" />}
                                                     {uploading === 'avatar' && <div className="absolute inset-0 bg-black/80 flex items-center justify-center"><div className="loading-spin"></div></div>}
                                                 </div>
-                                                <label className="flex items-center justify-center gap-3 w-full py-3 bg-white text-black font-black text-[10px] cursor-pointer hover:bg-zinc-200 transition-colors">
-                                                    <Icons.Upload /> UPLOAD_AVATAR
+                                                <label className="flex items-center justify-center gap-3 w-full py-3 bg-white text-black font-black text-[10px] cursor-pointer">
+                                                    <Icons.Upload /> AVATAR
                                                     <input type="file" accept="image/*" className="hidden" onChange={(e) => handleFileChange(e, 'avatar')} />
                                                 </label>
                                             </div>
@@ -328,8 +264,8 @@
                                                     {profile.bg_url && <img src={profile.bg_url} className="w-full h-full object-cover" />}
                                                     {uploading === 'bg' && <div className="absolute inset-0 bg-black/80 flex items-center justify-center"><div className="loading-spin"></div></div>}
                                                 </div>
-                                                <label className="flex items-center justify-center gap-3 w-full py-3 bg-zinc-800 text-white font-black text-[10px] cursor-pointer hover:bg-zinc-700 transition-colors">
-                                                    <Icons.Upload /> UPLOAD_BG
+                                                <label className="flex items-center justify-center gap-3 w-full py-3 bg-zinc-800 text-white font-black text-[10px] cursor-pointer">
+                                                    <Icons.Upload /> BG
                                                     <input type="file" accept="image/*" className="hidden" onChange={(e) => handleFileChange(e, 'bg')} />
                                                 </label>
                                             </div>
@@ -337,29 +273,13 @@
                                     </div>
 
                                     <div className="space-y-6">
-                                        <h3 className="text-xs font-black uppercase tracking-widest text-zinc-500 border-l-4 border-indigo-600 pl-4">Visual & Branding</h3>
+                                        <h3 className="text-xs font-black uppercase tracking-widest text-zinc-500 border-l-4 border-indigo-600 pl-4">Pengaturan Profil</h3>
                                         <div className="p-6 bg-zinc-900 border-2 border-zinc-800 space-y-6">
-                                            <div className="flex items-center gap-5">
-                                                <input 
-                                                    type="color" 
-                                                    value={profile.text_color} 
-                                                    onChange={e => setProfile({...profile, text_color: e.target.value})}
-                                                    className="w-12 h-12 bg-transparent border-none cursor-pointer"
-                                                />
-                                                <div>
-                                                    <p className="text-[10px] font-black uppercase">Warna Aksen Global</p>
-                                                    <p className="text-[9px] text-zinc-500 italic">Sesuaikan dengan mood background kamu</p>
-                                                </div>
-                                            </div>
-                                            <div className="space-y-4">
-                                                <input value={profile.name} onChange={e => setProfile({...profile, name: e.target.value})} placeholder="Display Name" className="w-full bg-black border-2 border-zinc-800 p-4 text-sm font-bold outline-none focus:border-white" />
-                                                <textarea value={profile.bio} onChange={e => setProfile({...profile, bio: e.target.value})} placeholder="Slogan / Bio" className="w-full bg-black border-2 border-zinc-800 p-4 text-sm outline-none focus:border-white h-24" />
-                                            </div>
-                                            <button 
-                                                onClick={saveProfile} 
-                                                className={`w-full py-5 font-black uppercase text-xs tracking-widest flex items-center justify-center gap-3 transition-all ${saveStatus === 'success' ? 'bg-green-600' : 'bg-indigo-600 pixel-border-indigo'}`}
-                                            >
-                                                {saveStatus === 'saving' ? <div className="loading-spin"></div> : (saveStatus === 'success' ? '✓_DATA_TERSIPAN' : 'SIMPAN_KONFIGURASI')}
+                                            <input type="color" value={profile.text_color} onChange={e => setProfile({...profile, text_color: e.target.value})} className="w-12 h-12 bg-transparent border-none cursor-pointer" />
+                                            <input value={profile.name} onChange={e => setProfile({...profile, name: e.target.value})} placeholder="Nama Lengkap" className="w-full bg-black border-2 border-zinc-800 p-4 text-sm font-bold outline-none" />
+                                            <textarea value={profile.bio} onChange={e => setProfile({...profile, bio: e.target.value})} placeholder="Bio Singkat" className="w-full bg-black border-2 border-zinc-800 p-4 text-sm outline-none h-24" />
+                                            <button onClick={saveProfile} className={`w-full py-5 font-black uppercase text-xs tracking-widest ${saveStatus === 'success' ? 'bg-green-600' : 'bg-indigo-600 pixel-border-indigo'}`}>
+                                                {saveStatus === 'saving' ? 'SAVING...' : (saveStatus === 'success' ? '✓_SINKRON' : 'UPDATE_DATA')}
                                             </button>
                                         </div>
                                     </div>
@@ -367,65 +287,25 @@
 
                                 <div className="space-y-12">
                                     <div className="flex justify-between items-center border-l-4 border-indigo-600 pl-4">
-                                        <h3 className="text-xs font-black uppercase tracking-widest text-zinc-500">Direktori Link</h3>
-                                        <button 
-                                            onClick={async () => {
-                                                const { data } = await supabaseClient.from('links').insert({ user_id: user.id, title: 'NEW_ITEM', url: 'https://', type: 'square' }).select().single();
-                                                setLinks([...links, data]);
-                                            }}
-                                            className="text-[10px] font-black border-2 border-white px-5 py-2 hover:bg-white hover:text-black transition-colors"
-                                        >+ TAMBAH_LINK</button>
+                                        <h3 className="text-xs font-black uppercase tracking-widest text-zinc-500">Daftar Link</h3>
+                                        <button onClick={async () => {
+                                            const { data } = await supabaseClient.from('links').insert({ user_id: user.id, title: 'NEW_LINK', url: 'https://', type: 'square' }).select().single();
+                                            setLinks([...links, data]);
+                                        }} className="text-[10px] font-black border-2 border-white px-5 py-2">+ TAMBAH</button>
                                     </div>
-
-                                    <div className="space-y-5 max-h-[600px] overflow-y-auto pr-4 custom-scrollbar">
+                                    <div className="space-y-5 max-h-[600px] overflow-y-auto pr-4">
                                         {links.map(l => (
-                                            <div key={l.id} className="p-6 border-2 border-zinc-800 bg-zinc-900/30 space-y-4 relative group hover:border-zinc-500 transition-colors">
-                                                <button onClick={async () => {
-                                                    await supabaseClient.from('links').delete().eq('id', l.id);
-                                                    setLinks(links.filter(it => it.id !== l.id));
-                                                }} className="absolute top-6 right-6 text-red-500 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-opacity"><Icons.Trash /></button>
-                                                
-                                                <div className="flex items-center gap-4">
-                                                    <select 
-                                                        value={l.type} 
-                                                        onChange={async (e) => {
-                                                            const val = e.target.value;
-                                                            setLinks(links.map(it => it.id === l.id ? {...it, type: val} : it));
-                                                            await supabaseClient.from('links').update({ type: val }).eq('id', l.id);
-                                                        }}
-                                                        className="bg-black text-[9px] font-black uppercase p-2 border border-zinc-700 outline-none cursor-pointer"
-                                                    >
-                                                        <option value="social">SOCIAL_BAR</option>
-                                                        <option value="square">GRID_CARD</option>
-                                                    </select>
-                                                    <span className="text-indigo-400">{getIconByUrl(l.url)}</span>
-                                                </div>
-
-                                                <div className="space-y-3">
-                                                    <input 
-                                                        value={l.title} 
-                                                        onChange={e => {
-                                                            const v = e.target.value;
-                                                            setLinks(links.map(it => it.id === l.id ? {...it, title: v} : it));
-                                                            supabaseClient.from('links').update({ title: v }).eq('id', l.id).then();
-                                                        }} 
-                                                        className="bg-transparent text-sm font-black block w-full outline-none border-b border-zinc-800 focus:border-white py-1" 
-                                                    />
-                                                    <input 
-                                                        value={l.url} 
-                                                        onChange={e => {
-                                                            const v = e.target.value;
-                                                            setLinks(links.map(it => it.id === l.id ? {...it, url: v} : it));
-                                                            supabaseClient.from('links').update({ url: v }).eq('id', l.id).then();
-                                                        }} 
-                                                        placeholder="https://platform.com/user"
-                                                        className="bg-transparent text-[10px] text-zinc-500 block w-full outline-none font-bold" 
-                                                    />
-                                                </div>
+                                            <div key={l.id} className="p-6 border-2 border-zinc-800 bg-zinc-900/30 space-y-4 relative group">
+                                                <button onClick={async () => { await supabaseClient.from('links').delete().eq('id', l.id); setLinks(links.filter(it => it.id !== l.id)); }} className="absolute top-6 right-6 text-red-500 opacity-0 group-hover:opacity-100"><Icons.Trash /></button>
+                                                <select value={l.type} onChange={async (e) => { const v = e.target.value; setLinks(links.map(it => it.id === l.id ? {...it, type: v} : it)); await supabaseClient.from('links').update({ type: v }).eq('id', l.id); }} className="bg-black text-[9px] font-black p-2 border border-zinc-700">
+                                                    <option value="social">SOCIAL_ICON</option>
+                                                    <option value="square">GRID_CARD</option>
+                                                </select>
+                                                <input value={l.title} onChange={e => { const v = e.target.value; setLinks(links.map(it => it.id === l.id ? {...it, title: v} : it)); supabaseClient.from('links').update({ title: v }).eq('id', l.id).then(); }} className="bg-transparent text-sm font-black block w-full outline-none border-b border-zinc-800 py-1" />
+                                                <input value={l.url} onChange={e => { const v = e.target.value; setLinks(links.map(it => it.id === l.id ? {...it, url: v} : it)); supabaseClient.from('links').update({ url: v }).eq('id', l.id).then(); }} className="bg-transparent text-[10px] text-zinc-500 block w-full outline-none" />
                                             </div>
                                         ))}
                                     </div>
-                                    <p className="text-[9px] text-zinc-600 font-bold italic uppercase tracking-widest text-center">Ikon dideteksi secara otomatis melalui URL.</p>
                                 </div>
                             </div>
                         </div>
