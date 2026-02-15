@@ -1,371 +1,306 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- SEO UTAMA -->
-    <title>Bagus Ardianto Adi Saputro | Profil Profesional</title>
-    <meta name="description" content="Profil resmi Bagus Ardianto Adi Saputro. Hubungi langsung untuk kolaborasi profesional dan dukungan proyek kreatif.">
-    <meta name="keywords" content="Bagus Ardianto, Bagus Ardianto Adi Saputro, Ardianto Adi, Profesional Indonesia, Portofolio Bagus Ardianto">
-    
-    <!-- Favicon & Social Image -->
-    <link rel="icon" type="image/png" href="icon-1.png">
-    <link rel="apple-touch-icon" href="icon-1.png">
-    <meta property="og:image" content="icon-1.png">
-    <meta property="og:title" content="Bagus Ardianto Adi Saputro">
-    <meta property="og:description" content="Profil profesional dan hub kolaborasi kreatif Bagus Ardianto.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bagus Ardianto Adi Saputro | Profil Profesional</title>
+  <meta name="description" content="Profil resmi Bagus Ardianto Adi Saputro. Hubungi langsung untuk kolaborasi profesional.">
+  <meta name="keywords" content="Bagus Ardianto, Profesional Indonesia, Portofolio Bagus Ardianto">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://start.progresix.site">
+  <link rel="icon" type="image/png" href="https://start.progresix.site/icon-1.png">
+  <link rel="apple-touch-icon" href="https://start.progresix.site/icon-1.png">
+  <meta property="og:url" content="https://start.progresix.site">
+  <meta property="og:image" content="https://start.progresix.site/icon-1.png">
+  <meta property="og:title" content="Bagus Ardianto Adi Saputro">
+  <meta property="og:description" content="Profil profesional dan hub kolaborasi kreatif.">
+  <meta name="twitter:card" content="summary_large_image">
 
-    <!-- JSON-LD: Schema Org -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Bagus Ardianto Adi Saputro",
-      "alternateName": "Bagus Ardianto",
-      "url": "https://bardianto.com",
-      "image": "icon-1.png",
-      "jobTitle": "Professional Specialist",
-      "sameAs": [
-        "https://instagram.com/bagusardianto",
-        "https://linkedin.com/in/bagus-ardianto-adi-saputro"
-      ]
+  <!-- Tailwind + Font -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+  <!-- Supabase JS -->
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+
+  <style>
+    body { font-family: 'JetBrains Mono', monospace; background: #000; color: #fff; }
+    .glass-pixel {
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(12px);
+      border: 2px solid rgba(255,255,255,0.15);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5), 4px 4px 0 0 currentColor;
+      transition: all 0.2s;
     }
-    </script>
-
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
-    
-    <style>
-        body { background-color: #000; font-family: 'JetBrains Mono', monospace; margin: 0; -webkit-tap-highlight-color: transparent; overflow-x: hidden; }
-        .pixel-border { border: 3px solid currentColor; box-shadow: 6px 6px 0px 0px currentColor; }
-        .pixel-border:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0px 0px currentColor; }
-        .pixel-border-indigo { border: 3px solid #6366f1; box-shadow: 6px 6px 0px 0px #6366f1; }
-        .loading-spin { width: 20px; height: 20px; border: 3px solid rgba(255,255,255,0.2); border-top-color: currentColor; border-radius: 50%; animation: spin 0.8s linear infinite; }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-        .bg-overlay { position: fixed; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.9)); z-index: -1; }
-        .hidden-admin-trigger { position: fixed; bottom: 0; left: 0; width: 60px; height: 60px; opacity: 0; cursor: default; z-index: 100; }
-        
-        /* Smooth Scrollbar for Admin */
-        .admin-scroll::-webkit-scrollbar { width: 4px; }
-        .admin-scroll::-webkit-scrollbar-track { background: transparent; }
-        .admin-scroll::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
-    </style>
+    .glass-pixel:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 0 currentColor; }
+    .bg-overlay { position: fixed; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.9)); z-index: -1; }
+    .fade-in { animation: fadeIn 0.3s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
+  </style>
 </head>
-<body>
-    <div id="root"></div>
+<body class="antialiased">
+  <div id="app" class="min-h-screen flex flex-col items-center px-4 py-8 relative">
+    <div id="bg-image" class="fixed inset-0 -z-20 bg-cover bg-center"></div>
+    <div class="bg-overlay"></div>
 
-    <script type="text/babel">
-        const { useState, useEffect } = React;
+    <div class="w-full max-w-md fade-in">
+      <!-- header share -->
+      <div class="flex justify-end mb-6">
+        <button id="share-btn" class="glass-pixel p-3 text-white hover:bg-white hover:text-black transition-colors">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        </button>
+      </div>
 
-        const SUPABASE_URL = "https://dkftqhkpwymbdtpznwto.supabase.co";
-        const SUPABASE_KEY = "sb_publishable_Hlzx5XRu6hxnoxOCNKk7vg_9829kGve";
-        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+      <!-- avatar -->
+      <div id="avatar-container" class="w-28 h-28 mx-auto mb-5 glass-pixel overflow-hidden border-2" style="border-color: currentColor;">
+        <img id="avatar-img" class="w-full h-full object-cover" src="" alt="avatar">
+      </div>
 
-        const Icons = {
-            Instagram: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>,
-            Github: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>,
-            X: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4l11.733 16h4.267l-11.733-16zM4 20l6.768-6.768M20 4l-6.768 6.768"></path></svg>,
-            Youtube: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.11 1 12 1 12s0 3.89.46 5.58a2.78 2.78 0 0 0 1.94 2c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.89 23 12 23 12s0-3.89-.46-5.58z"></path><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"></polygon></svg>,
-            Tiktok: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>,
-            Linkedin: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>,
-            Donate: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"></path><path d="M4 6v12c0 1.1.9 2 2 2h14v-4"></path><path d="M18 12a2 2 0 0 0-2 2c0 1.1.9 2 2 2h4v-4h-4z"></path></svg>,
-            Trash: () => <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"></path></svg>,
-            Upload: () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>,
-            Global: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>,
-            Check: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
-        };
+      <!-- nama & bio -->
+      <h1 id="profile-name" class="text-2xl font-black uppercase tracking-tighter text-center leading-none mb-2"></h1>
+      <p id="profile-bio" class="text-[10px] mb-8 text-center uppercase tracking-[0.3em] font-bold opacity-60 italic"></p>
 
-        const getIconByUrl = (url) => {
-            const l = url.toLowerCase();
-            if (l.includes('instagram.com')) return <Icons.Instagram />;
-            if (l.includes('github.com')) return <Icons.Github />;
-            if (l.includes('twitter.com') || l.includes('x.com')) return <Icons.X />;
-            if (l.includes('youtube.com') || l.includes('youtu.be')) return <Icons.Youtube />;
-            if (l.includes('tiktok.com')) return <Icons.Tiktok />;
-            if (l.includes('linkedin.com')) return <Icons.Linkedin />;
-            if (l.includes('wa.me') || l.includes('whatsapp.com')) return <Icons.Global />;
-            return <Icons.Global />;
-        };
+      <!-- social links -->
+      <div id="social-links" class="flex flex-wrap justify-center gap-4 mb-10"></div>
 
-        const App = () => {
-            const [view, setView] = useState('home'); 
-            const [user, setUser] = useState(null);
-            const [profile, setProfile] = useState({ 
-                name: 'Bagus Ardianto Adi Saputro', bio: 'Professional Profile', avatar_url: '', bg_url: '', text_color: '#ffffff' 
-            });
-            const [links, setLinks] = useState([]);
-            const [loading, setLoading] = useState(true);
-            const [uploading, setUploading] = useState(null);
-            const [saveStatus, setSaveStatus] = useState(null);
-            const [showDonateModal, setShowDonateModal] = useState(false);
-            const [donateAmount, setDonateAmount] = useState(10000);
+      <!-- square links (grid 2 kolom) -->
+      <div id="square-links" class="grid grid-cols-2 gap-4 w-full mb-10"></div>
 
-            useEffect(() => {
-                const init = async () => {
-                    const { data: { session } } = await supabaseClient.auth.getSession();
-                    if (session) setUser(session.user);
-                    await fetchData();
-                };
-                init();
-            }, []);
+      <!-- donate -->
+      <button id="donate-btn" class="w-full py-4 bg-indigo-600 glass-pixel border-indigo-400 flex items-center justify-center gap-3 font-black text-xs uppercase text-white mb-16 hover:bg-indigo-500">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"/><path d="M4 6v12c0 1.1.9 2 2 2h14v-4"/><path d="M18 12a2 2 0 0 0-2 2c0 1.1.9 2 2 2h4v-4h-4z"/></svg>
+        SUPPORT PROJECT
+      </button>
 
-            const fetchData = async () => {
-                setLoading(true);
-                const { data: prof } = await supabaseClient.from('profiles').select('*').limit(1).single();
-                if (prof) {
-                    setProfile(prof);
-                    // Order by created_at DESC agar link terbaru di atas
-                    const { data: lnks } = await supabaseClient.from('links').select('*').eq('user_id', prof.id).order('created_at', { ascending: false });
-                    setLinks(lnks || []);
-                }
-                setLoading(false);
-            };
+      <footer class="text-[8px] opacity-20 uppercase tracking-[0.5em] font-bold text-center">© <span id="current-year"></span> BARDIANTO</footer>
+    </div>
 
-            const handleFileChange = async (e, type) => {
-                const file = e.target.files[0];
-                if (!file || !user) return;
-                setUploading(type);
-                const fileExt = file.name.split('.').pop();
-                const fileName = `${user.id}/${type}_${Date.now()}.${fileExt}`;
-                try {
-                    const { error: uploadError } = await supabaseClient.storage.from('avatars').upload(fileName, file);
-                    if (uploadError) throw uploadError;
-                    const { data: { publicUrl } } = supabaseClient.storage.from('avatars').getPublicUrl(fileName);
-                    setProfile(prev => ({ ...prev, [type === 'avatar' ? 'avatar_url' : 'bg_url']: publicUrl }));
-                } catch (err) { alert(err.message); } finally { setUploading(null); }
-            };
+    <!-- MODAL SHARE -->
+    <div id="share-modal" class="fixed inset-0 bg-black/95 backdrop-blur-xl z-50 hidden items-center justify-center p-6">
+      <div class="w-full max-w-xs glass-pixel bg-zinc-900/80 p-8 text-white fade-in border-2 border-white/20">
+        <h3 class="text-xl font-black uppercase italic border-b-2 border-white pb-3 mb-6 tracking-tighter">Share Profile</h3>
+        <div class="bg-black/50 border border-white/10 p-4 mb-6 flex flex-col gap-2 relative rounded">
+          <span class="text-[8px] font-black opacity-30 uppercase tracking-widest">Public URL</span>
+          <span id="share-url" class="text-[10px] font-bold truncate pr-8">https://start.progresix.site</span>
+          <button id="copy-btn" class="absolute right-4 bottom-4 p-2 hover:bg-white hover:text-black transition-all rounded">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          </button>
+          <div id="copy-toast" class="absolute -top-10 left-0 bg-white text-black text-[9px] font-black px-2 py-1 border-2 border-black hidden">LINK_COPIED</div>
+        </div>
+        <a id="wa-share" href="#" target="_blank" class="w-full py-4 bg-green-600 glass-pixel border-green-400 flex items-center justify-center gap-3 font-black text-[10px] uppercase text-white hover:bg-green-500 mb-4 rounded">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-14h.8c4.3 0 7.7 3.5 7.7 7.7v2.5z"/></svg>
+          SHARE_WHATSAPP
+        </a>
+        <button id="close-share" class="w-full text-[9px] font-bold text-zinc-500 uppercase tracking-widest hover:text-white">CLOSE</button>
+      </div>
+    </div>
 
-            const handleLogin = async (e) => {
-                e.preventDefault();
-                setLoading(true);
-                const { data, error } = await supabaseClient.auth.signInWithPassword({ 
-                    email: e.target.email.value, 
-                    password: e.target.password.value 
-                });
-                if (error) alert(error.message);
-                else { setUser(data.user); setView('admin'); }
-                setLoading(false);
-            };
+    <!-- MODAL DONATE (dummy) -->
+    <div id="donate-modal" class="fixed inset-0 bg-black/95 backdrop-blur-xl z-50 hidden items-center justify-center p-6">
+      <div class="w-full max-w-xs glass-pixel bg-zinc-900/80 p-8 text-white fade-in border-2 border-white/20">
+        <h3 class="text-xl font-black uppercase italic border-b-2 border-white pb-3 mb-6 tracking-tighter">Support Project</h3>
+        <div class="grid grid-cols-2 gap-3 mb-8">
+          <button class="donate-opt p-3 border-2 font-black text-[9px] transition-colors border-zinc-700 text-zinc-400 hover:border-zinc-400" data-amount="10000">IDR 10,000</button>
+          <button class="donate-opt p-3 border-2 font-black text-[9px] transition-colors border-zinc-700 text-zinc-400 hover:border-zinc-400" data-amount="25000">IDR 25,000</button>
+          <button class="donate-opt p-3 border-2 font-black text-[9px] transition-colors border-zinc-700 text-zinc-400 hover:border-zinc-400" data-amount="50000">IDR 50,000</button>
+          <button class="donate-opt p-3 border-2 font-black text-[9px] transition-colors border-zinc-700 text-zinc-400 hover:border-zinc-400" data-amount="100000">IDR 100,000</button>
+        </div>
+        <button id="proceed-donate" class="w-full py-4 bg-indigo-600 text-white font-black uppercase text-xs glass-pixel border-indigo-400 mb-4 italic hover:bg-indigo-500 rounded">PROCEED_SUPPORT</button>
+        <button id="close-donate" class="w-full text-[9px] font-bold text-zinc-500 uppercase tracking-widest hover:text-white">CANCEL</button>
+      </div>
+    </div>
+  </div>
 
-            const saveProfile = async () => {
-                setSaveStatus('saving');
-                const { error } = await supabaseClient.from('profiles').upsert({ id: user.id, ...profile });
-                if (error) { alert(error.message); setSaveStatus(null); } 
-                else { 
-                    setSaveStatus('success'); 
-                    setTimeout(() => setSaveStatus(null), 3000); 
-                }
-            };
+  <script>
+    // ==================== KONFIGURASI ====================
+    const SUPABASE_URL = 'https://dkftqhkpwymbdtpznwto.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_Hlzx5XRu6hxnoxOCNKk7vg_9829kGve';
+    const PUBLIC_URL = 'https://start.progresix.site';
 
-            const addNewLink = async () => {
-                const { data, error } = await supabaseClient.from('links').insert({ 
-                    user_id: user.id, 
-                    title: 'LINK_BARU', 
-                    url: 'https://', 
-                    type: 'square' 
-                }).select().single();
-                
-                if (data) {
-                    // Masukkan ke array links di posisi index 0 (paling atas)
-                    setLinks([data, ...links]);
-                }
-            };
+    // ==================== SUPABASE CLIENT ====================
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-            if (loading && view === 'home') return <div className="h-screen flex items-center justify-center bg-black text-white font-bold tracking-widest italic animate-pulse">SABAR_YA...</div>;
+    // ==================== IKON GLOBAL ====================
+    const Icons = {
+      instagram: () => `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>`,
+      github: () => `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>`,
+      x: () => `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l11.733 16h4.267l-11.733-16zM4 20l6.768-6.768M20 4l-6.768 6.768"/></svg>`,
+      youtube: () => `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.11 1 12 1 12s0 3.89.46 5.58a2.78 2.78 0 0 0 1.94 2c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.89 23 12 23 12s0-3.89-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>`,
+      tiktok: () => `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>`,
+      linkedin: () => `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>`,
+      donate: () => `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"/><path d="M4 6v12c0 1.1.9 2 2 2h14v-4"/><path d="M18 12a2 2 0 0 0-2 2c0 1.1.9 2 2 2h4v-4h-4z"/></svg>`,
+      trash: () => `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>`,
+      upload: () => `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>`,
+      global: () => `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+      check: () => `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>`,
+      share: () => `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>`,
+      copy: () => `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`,
+      whatsapp: () => `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-14h.8c4.3 0 7.7 3.5 7.7 7.7v2.5z"/></svg>`,
+    };
 
-            const dynamicStyle = { color: profile.text_color || '#ffffff' };
+    function getIconByUrl(url) {
+      const l = url.toLowerCase();
+      if (l.includes('instagram.com')) return Icons.instagram();
+      if (l.includes('github.com')) return Icons.github();
+      if (l.includes('twitter.com') || l.includes('x.com')) return Icons.x();
+      if (l.includes('youtube.com') || l.includes('youtu.be')) return Icons.youtube();
+      if (l.includes('tiktok.com')) return Icons.tiktok();
+      if (l.includes('linkedin.com')) return Icons.linkedin();
+      return Icons.global();
+    }
 
-            return (
-                <div className="min-h-screen" style={dynamicStyle}>
-                    {/* SEO TERSEMBUNYI */}
-                    <div className="sr-only">
-                        <h1>Bagus Ardianto Adi Saputro</h1>
-                        <p>Profil resmi Bagus Ardianto Adi Saputro - Professional Portfolio.</p>
-                    </div>
+    // ==================== STATE ====================
+    let profile = { name: '', bio: '', avatar_url: '', bg_url: '', text_color: '#ffffff' };
+    let links = [];
 
-                    {view === 'home' && (
-                        <div className="max-w-md mx-auto pt-24 px-8 pb-32 flex flex-col items-center">
-                            {profile.bg_url && (
-                                <>
-                                    <img src={profile.bg_url} className="fixed inset-0 w-full h-full object-cover -z-20 grayscale-[0.3]" alt="Background" />
-                                    <div className="bg-overlay" />
-                                </>
-                            )}
-                            
-                            <div className="w-32 h-32 border-4 mb-8 bg-zinc-900 overflow-hidden pixel-border" style={{borderColor: profile.text_color}}>
-                                {profile.avatar_url ? (
-                                    <img src={profile.avatar_url} className="w-full h-full object-cover" alt="Avatar" />
-                                ) : (
-                                    <div className="w-full h-full flex items-center justify-center opacity-30 italic text-[10px]">NO_IMAGE</div>
-                                )}
-                            </div>
+    // DOM elements
+    const avatarImg = document.getElementById('avatar-img');
+    const profileName = document.getElementById('profile-name');
+    const profileBio = document.getElementById('profile-bio');
+    const socialContainer = document.getElementById('social-links');
+    const squareContainer = document.getElementById('square-links');
+    const bgDiv = document.getElementById('bg-image');
+    const yearSpan = document.getElementById('current-year');
+    const shareModal = document.getElementById('share-modal');
+    const donateModal = document.getElementById('donate-modal');
+    const shareBtn = document.getElementById('share-btn');
+    const donateBtn = document.getElementById('donate-btn');
+    const closeShare = document.getElementById('close-share');
+    const closeDonate = document.getElementById('close-donate');
+    const copyBtn = document.getElementById('copy-btn');
+    const copyToast = document.getElementById('copy-toast');
+    const waShare = document.getElementById('wa-share');
+    const shareUrlSpan = document.getElementById('share-url');
+    const donateOpts = document.querySelectorAll('.donate-opt');
+    const proceedDonate = document.getElementById('proceed-donate');
 
-                            <h2 className="text-2xl font-black uppercase tracking-tighter mb-2 text-center">{profile.name}</h2>
-                            <p className="text-[10px] mb-12 text-center uppercase tracking-[0.4em] font-bold opacity-70 italic">{profile.bio}</p>
+    let selectedAmount = 10000;
 
-                            <div className="flex flex-wrap justify-center gap-5 mb-12">
-                                {links.filter(l => l.type === 'social').map(l => (
-                                    <a key={l.id} href={l.url} target="_blank" className="w-14 h-14 bg-black/40 backdrop-blur-md flex items-center justify-center pixel-border hover:bg-white hover:text-black transition-all">
-                                        {getIconByUrl(l.url)}
-                                    </a>
-                                ))}
-                            </div>
+    // Set year
+    yearSpan.textContent = new Date().getFullYear();
 
-                            <div className="grid grid-cols-2 gap-4 w-full mb-12">
-                                {links.filter(l => l.type === 'square').map(l => (
-                                    <a key={l.id} href={l.url} target="_blank" className="aspect-square bg-black/40 backdrop-blur-md p-5 flex flex-col justify-between pixel-border group">
-                                        <div className="flex justify-end opacity-30 group-hover:opacity-100 transition-opacity">{getIconByUrl(l.url)}</div>
-                                        <span className="text-[10px] font-black uppercase tracking-widest leading-tight">{l.title}</span>
-                                    </a>
-                                ))}
-                            </div>
+    // ==================== FUNGSI ====================
+    async function fetchData() {
+      const { data: prof, error: profErr } = await supabaseClient
+        .from('profiles')
+        .select('*')
+        .limit(1)
+        .maybeSingle();
 
-                            <button onClick={() => setShowDonateModal(true)} className="w-full py-5 bg-indigo-600 pixel-border-indigo flex items-center justify-center gap-4 font-black text-sm uppercase text-white mb-16">
-                                <Icons.Donate /> SUPPORT PROJECT
-                            </button>
+      if (profErr) console.error('Profile fetch error:', profErr);
+      if (prof) {
+        profile = prof;
+        renderProfile();
+      }
 
-                            <div className="hidden-admin-trigger" onClick={() => setView('login')}></div>
-                        </div>
-                    )}
+      if (prof?.id) {
+        const { data: lnks, error: linksErr } = await supabaseClient
+          .from('links')
+          .select('*')
+          .eq('user_id', prof.id)
+          .order('created_at', { ascending: false });
 
-                    {view === 'login' && (
-                        <div className="h-screen flex items-center justify-center px-6 bg-black">
-                            <form onSubmit={handleLogin} className="w-full max-w-xs pixel-border p-10 bg-zinc-900 space-y-6 text-white">
-                                <h2 className="text-xl font-black uppercase italic border-b-2 border-white pb-3 tracking-tighter">Admin Auth</h2>
-                                <input name="email" type="email" placeholder="EMAIL" className="w-full bg-black border-2 border-zinc-800 p-4 text-xs outline-none focus:border-white" required />
-                                <input name="password" type="password" placeholder="PASSWORD" className="w-full bg-black border-2 border-zinc-800 p-4 text-xs outline-none focus:border-white" required />
-                                <button className="w-full py-4 bg-white text-black font-black uppercase text-xs">LOG_IN</button>
-                                <button type="button" onClick={() => setView('home')} className="w-full text-[10px] font-bold opacity-40 uppercase tracking-widest">BACK_HOME</button>
-                            </form>
-                        </div>
-                    )}
+        if (!linksErr) {
+          links = lnks || [];
+          renderLinks();
+        }
+      }
+    }
 
-                    {view === 'admin' && (
-                        <div className="min-h-screen bg-black text-white flex flex-col">
-                            {/* Header Fixed */}
-                            <div className="sticky top-0 z-40 bg-black/80 backdrop-blur-md border-b-4 border-white p-6 md:px-12 flex justify-between items-center">
-                                <h1 className="text-xl md:text-2xl font-black uppercase italic tracking-tighter">ADMIN_PANEL</h1>
-                                <div className="flex gap-3">
-                                    <button onClick={() => setView('home')} className="px-4 py-2 border-2 border-white font-black text-[10px] uppercase">Preview</button>
-                                    <button onClick={() => { supabaseClient.auth.signOut(); setView('home'); }} className="px-4 py-2 bg-red-600 font-black text-[10px] uppercase">Exit</button>
-                                </div>
-                            </div>
+    function renderProfile() {
+      document.documentElement.style.color = profile.text_color;
+      profileName.textContent = profile.name || 'Bagus Ardianto Adi Saputro';
+      profileBio.textContent = profile.bio || 'Professional Profile';
+      avatarImg.src = profile.avatar_url || '';
+      if (profile.bg_url) {
+        bgDiv.style.backgroundImage = `url('${profile.bg_url}')`;
+      } else {
+        bgDiv.style.backgroundImage = 'none';
+      }
+    }
 
-                            <div className="flex-1 overflow-y-auto admin-scroll p-6 md:p-12 pb-40">
-                                <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 lg:gap-20">
-                                    
-                                    {/* Kolom Kiri: Profil */}
-                                    <div className="space-y-10">
-                                        <section>
-                                            <h3 className="text-[10px] font-black uppercase tracking-widest text-zinc-500 mb-6 border-l-4 border-indigo-500 pl-3">ASET_VISUAL</h3>
-                                            <div className="grid grid-cols-2 gap-4">
-                                                <div className="space-y-3">
-                                                    <div className="aspect-square border-2 border-zinc-800 bg-zinc-900 overflow-hidden relative">
-                                                        {profile.avatar_url && <img src={profile.avatar_url} className="w-full h-full object-cover" />}
-                                                        {uploading === 'avatar' && <div className="absolute inset-0 bg-black/80 flex items-center justify-center"><div className="loading-spin"></div></div>}
-                                                    </div>
-                                                    <label className="flex items-center justify-center gap-2 w-full py-2 bg-white text-black font-black text-[9px] cursor-pointer">
-                                                        <Icons.Upload /> AVATAR
-                                                        <input type="file" className="hidden" onChange={(e) => handleFileChange(e, 'avatar')} />
-                                                    </label>
-                                                </div>
-                                                <div className="space-y-3">
-                                                    <div className="aspect-square border-2 border-zinc-800 bg-zinc-900 overflow-hidden relative">
-                                                        {profile.bg_url && <img src={profile.bg_url} className="w-full h-full object-cover" />}
-                                                        {uploading === 'bg' && <div className="absolute inset-0 bg-black/80 flex items-center justify-center"><div className="loading-spin"></div></div>}
-                                                    </div>
-                                                    <label className="flex items-center justify-center gap-2 w-full py-2 bg-zinc-800 text-white font-black text-[9px] cursor-pointer">
-                                                        <Icons.Upload /> BG_HERO
-                                                        <input type="file" className="hidden" onChange={(e) => handleFileChange(e, 'bg')} />
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </section>
+    function renderLinks() {
+      socialContainer.innerHTML = '';
+      squareContainer.innerHTML = '';
 
-                                        <section className="p-6 bg-zinc-900/50 border-2 border-zinc-800 space-y-6">
-                                            <h3 className="text-[10px] font-black uppercase tracking-widest text-zinc-500 border-l-4 border-indigo-500 pl-3">INFO_PROFIL</h3>
-                                            <div className="flex items-center gap-4">
-                                                <input type="color" value={profile.text_color} onChange={e => setProfile({...profile, text_color: e.target.value})} className="w-10 h-10 bg-transparent border-2 border-zinc-700 cursor-pointer" />
-                                                <span className="text-[10px] font-bold">Warna Teks & Border</span>
-                                            </div>
-                                            <input value={profile.name} onChange={e => setProfile({...profile, name: e.target.value})} placeholder="Nama" className="w-full bg-black border-2 border-zinc-800 p-3 text-xs font-bold" />
-                                            <textarea value={profile.bio} onChange={e => setProfile({...profile, bio: e.target.value})} placeholder="Bio" className="w-full bg-black border-2 border-zinc-800 p-3 text-xs h-20" />
-                                        </section>
-                                    </div>
+      links.forEach(link => {
+        if (link.type === 'social') {
+          const a = document.createElement('a');
+          a.href = link.url;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          a.className = 'w-12 h-12 glass-pixel flex items-center justify-center hover:bg-white hover:text-black transition-all';
+          a.innerHTML = getIconByUrl(link.url);
+          socialContainer.appendChild(a);
+        } else {
+          const a = document.createElement('a');
+          a.href = link.url;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          a.className = 'aspect-square glass-pixel p-5 flex flex-col justify-between hover:bg-white hover:text-black group transition-all';
+          a.innerHTML = `
+            <div class="flex justify-end opacity-40 group-hover:opacity-100">${getIconByUrl(link.url)}</div>
+            <span class="text-[10px] font-black uppercase tracking-widest leading-tight">${link.title || 'LINK'}</span>
+          `;
+          squareContainer.appendChild(a);
+        }
+      });
+    }
 
-                                    {/* Kolom Kanan: Links */}
-                                    <div className="space-y-8">
-                                        <div className="flex justify-between items-center border-l-4 border-indigo-500 pl-3">
-                                            <h3 className="text-[10px] font-black uppercase tracking-widest text-zinc-500">MANAGEMENT_LINKS</h3>
-                                            <button onClick={addNewLink} className="bg-white text-black px-4 py-2 font-black text-[9px]">+ TAMBAH_DI_ATAS</button>
-                                        </div>
-                                        
-                                        <div className="space-y-4">
-                                            {links.map(l => (
-                                                <div key={l.id} className="p-5 border-2 border-zinc-800 bg-zinc-900/40 relative group transition-all hover:border-zinc-500">
-                                                    <button onClick={async () => { await supabaseClient.from('links').delete().eq('id', l.id); setLinks(links.filter(it => it.id !== l.id)); }} className="absolute top-4 right-4 text-red-500 md:opacity-0 group-hover:opacity-100 p-2"><Icons.Trash /></button>
-                                                    <div className="flex gap-3 mb-3">
-                                                        <select value={l.type} onChange={async (e) => { const v = e.target.value; setLinks(links.map(it => it.id === l.id ? {...it, type: v} : it)); await supabaseClient.from('links').update({ type: v }).eq('id', l.id); }} className="bg-black text-[8px] font-black p-1 border border-zinc-700 outline-none">
-                                                            <option value="square">GRID_CARD</option>
-                                                            <option value="social">SOCIAL_ICON</option>
-                                                        </select>
-                                                    </div>
-                                                    <input value={l.title} onChange={e => { const v = e.target.value; setLinks(links.map(it => it.id === l.id ? {...it, title: v} : it)); supabaseClient.from('links').update({ title: v }).eq('id', l.id).then(); }} className="bg-transparent text-xs font-black block w-full outline-none border-b border-zinc-800 mb-2 py-1 uppercase" placeholder="JUDUL LINK" />
-                                                    <input value={l.url} onChange={e => { const v = e.target.value; setLinks(links.map(it => it.id === l.id ? {...it, url: v} : it)); supabaseClient.from('links').update({ url: v }).eq('id', l.id).then(); }} className="bg-transparent text-[9px] text-zinc-500 block w-full outline-none" placeholder="https://..." />
-                                                </div>
-                                            ))}
-                                            {links.length === 0 && <div className="text-center py-10 text-[10px] text-zinc-600 italic">BELUM_ADA_LINK_TERSEDIA</div>}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+    // ==================== EVENT LISTENERS ====================
+    shareBtn.addEventListener('click', () => {
+      shareModal.classList.remove('hidden');
+      shareModal.classList.add('flex');
+      shareUrlSpan.textContent = PUBLIC_URL;
+      waShare.href = `https://wa.me/?text=${encodeURIComponent('Cek profil profesional: ' + PUBLIC_URL)}`;
+    });
 
-                            {/* Floating Save Confirmation (Bottom) */}
-                            <div className="fixed bottom-0 left-0 right-0 p-6 z-50 flex justify-center pointer-events-none">
-                                <div className="w-full max-w-md pointer-events-auto">
-                                    {saveStatus === 'success' ? (
-                                        <div className="w-full bg-green-600 text-white p-4 flex items-center justify-center gap-3 font-black text-xs pixel-border-indigo shadow-2xl animate-bounce">
-                                            <Icons.Check /> DATA_BERHASIL_DISIMPAN
-                                        </div>
-                                    ) : (
-                                        <button onClick={saveProfile} className="w-full bg-indigo-600 text-white p-5 flex items-center justify-center gap-4 font-black text-xs uppercase pixel-border-indigo shadow-2xl">
-                                            {saveStatus === 'saving' ? 'PROSES_SINKRON...' : 'KONFIRMASI_UPDATE_PROFIL'}
-                                        </button>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                    )}
-                    
-                    {/* MODAL DONATE */}
-                    {showDonateModal && (
-                        <div className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-6 backdrop-blur-md">
-                            <div className="w-full max-w-xs pixel-border bg-zinc-900 p-8 text-white">
-                                <h3 className="text-xl font-black uppercase italic border-b-2 border-white pb-3 mb-6 tracking-tighter">Support Bagus</h3>
-                                <div className="grid grid-cols-2 gap-3 mb-8">
-                                    {[10000, 25000, 50000, 100000].map(amt => (
-                                        <button key={amt} onClick={() => setDonateAmount(amt)} className={`p-3 border-2 font-black text-[10px] ${donateAmount === amt ? 'bg-white text-black' : 'border-zinc-800 text-zinc-500'}`}>
-                                            {amt.toLocaleString()}
-                                        </button>
-                                    ))}
-                                </div>
-                                <button onClick={() => setShowDonateModal(false)} className="w-full py-4 bg-indigo-600 text-white font-black uppercase text-xs pixel-border-indigo mb-4 italic">KIRIM_DUKUNGAN</button>
-                                <button onClick={() => setShowDonateModal(false)} className="w-full text-[9px] font-bold text-zinc-500 uppercase">BATAL</button>
-                            </div>
-                        </div>
-                    )}
-                </div>
-            );
-        };
+    closeShare.addEventListener('click', () => {
+      shareModal.classList.add('hidden');
+      shareModal.classList.remove('flex');
+    });
 
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
-    </script>
+    donateBtn.addEventListener('click', () => {
+      donateModal.classList.remove('hidden');
+      donateModal.classList.add('flex');
+    });
+
+    closeDonate.addEventListener('click', () => {
+      donateModal.classList.add('hidden');
+      donateModal.classList.remove('flex');
+    });
+
+    copyBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(PUBLIC_URL);
+        copyToast.classList.remove('hidden');
+        setTimeout(() => copyToast.classList.add('hidden'), 2000);
+      } catch (err) {
+        alert('Gagal menyalin');
+      }
+    });
+
+    donateOpts.forEach(btn => {
+      btn.addEventListener('click', () => {
+        donateOpts.forEach(b => b.classList.remove('bg-white', 'text-black', 'border-white'));
+        btn.classList.add('bg-white', 'text-black', 'border-white');
+        selectedAmount = parseInt(btn.dataset.amount, 10);
+      });
+    });
+
+    proceedDonate.addEventListener('click', () => {
+      alert(`Terima kasih! Donasi IDR ${selectedAmount.toLocaleString()} (dummy)`);
+      donateModal.classList.add('hidden');
+      donateModal.classList.remove('flex');
+    });
+
+    // Tutup modal jika klik di luar
+    window.addEventListener('click', (e) => {
+      if (e.target === shareModal) shareModal.classList.add('hidden');
+      if (e.target === donateModal) donateModal.classList.add('hidden');
+    });
+
+    // ==================== INIT ====================
+    fetchData();
+  </script>
 </body>
 </html>
-
