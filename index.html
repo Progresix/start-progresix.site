@@ -10,7 +10,7 @@
   
   <!-- Font system-ui untuk performa -->
   <style>
-    /* RESET & DASAR */
+    /* ==================== RESET & DASAR ==================== */
     * { 
       margin: 0; 
       padding: 0; 
@@ -30,7 +30,7 @@
       -webkit-font-smoothing: antialiased;
     }
     
-    /* Background dari admin */
+    /* ==================== BACKGROUND ==================== */
     #bg-image { 
       position: fixed; 
       inset: 0; 
@@ -38,6 +38,7 @@
       background-position: center; 
       z-index: 1;
       will-change: transform;
+      transition: background-image 0.3s ease;
     }
     
     .bg-overlay {
@@ -47,7 +48,7 @@
       z-index: 2;
     }
     
-    /* Kontainer utama */
+    /* ==================== KONTAINER UTAMA ==================== */
     .container {
       position: relative;
       z-index: 10;
@@ -57,9 +58,10 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      animation: fadeIn 0.5s ease;
     }
     
-    /* LOADING SCREEN */
+    /* ==================== LOADING SCREEN ==================== */
     .loading-screen {
       position: fixed;
       inset: 0;
@@ -85,11 +87,22 @@
       animation: spin 0.8s linear infinite;
     }
     
+    /* ==================== ANIMASI ==================== */
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
     
-    /* Share button */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes scaleIn {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    
+    /* ==================== SHARE BUTTON ==================== */
     .share-btn {
       display: flex;
       justify-content: flex-end;
@@ -107,7 +120,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      transition: background 0.2s;
+      transition: background 0.2s, transform 0.1s;
       cursor: pointer;
       -webkit-user-select: none;
       -moz-user-select: none;
@@ -128,7 +141,7 @@
       pointer-events: none;
     }
     
-    /* Avatar */
+    /* ==================== AVATAR ==================== */
     .avatar {
       width: 96px;
       height: 96px;
@@ -138,9 +151,10 @@
       margin: 0 auto 12px;
       display: block;
       pointer-events: none;
+      animation: scaleIn 0.4s ease;
     }
     
-    /* Nama & Bio */
+    /* ==================== NAMA & BIO ==================== */
     .name {
       font-weight: 700;
       font-size: 24px;
@@ -148,6 +162,7 @@
       margin-bottom: 4px;
       letter-spacing: -0.5px;
       text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      animation: fadeIn 0.4s ease;
     }
     
     .bio {
@@ -157,9 +172,10 @@
       margin-bottom: 24px;
       font-weight: 400;
       text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+      animation: fadeIn 0.5s ease;
     }
     
-    /* SOCIAL ICONS - Hanya untuk platform terkenal */
+    /* ==================== SOCIAL ICONS ==================== */
     .social-grid {
       display: flex;
       flex-wrap: wrap;
@@ -178,7 +194,7 @@
       border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 50%;
       color: white;
-      transition: background 0.15s;
+      transition: background 0.15s, transform 0.1s;
       text-decoration: none;
     }
     
@@ -195,7 +211,7 @@
       pointer-events: none;
     }
     
-    /* LINK CARDS - Ikon hanya untuk platform terkenal */
+    /* ==================== LINK CARDS ==================== */
     .links-grid {
       display: flex;
       flex-direction: column;
@@ -215,9 +231,10 @@
       border-radius: 60px;
       color: white;
       text-decoration: none;
-      transition: background 0.15s, transform 0.15s;
+      transition: background 0.15s, transform 0.1s;
       will-change: transform;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 0.3s ease;
     }
     
     .link-card:active {
@@ -244,7 +261,12 @@
       flex: 1;
     }
     
-    /* DONATE BUTTON */
+    /* Link tanpa ikon */
+    .link-card.no-icon span {
+      margin-left: 0;
+    }
+    
+    /* ==================== DONATE BUTTON ==================== */
     .donate-btn {
       width: 100%;
       background: white;
@@ -259,7 +281,7 @@
       justify-content: center;
       gap: 8px;
       margin-bottom: 24px;
-      transition: background 0.15s;
+      transition: background 0.15s, transform 0.1s;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
       cursor: pointer;
     }
@@ -277,7 +299,7 @@
       pointer-events: none;
     }
     
-    /* FOOTER */
+    /* ==================== FOOTER ==================== */
     .footer {
       text-align: center;
       color: rgba(255, 255, 255, 0.3);
@@ -287,7 +309,7 @@
       margin-top: auto;
     }
     
-    /* MODAL - Bisa di-copy */
+    /* ==================== MODAL ==================== */
     .modal-content, 
     .modal-content *,
     .url-text,
@@ -320,6 +342,7 @@
       width: 100%;
       color: white;
       border: 1px solid #333;
+      animation: scaleIn 0.3s ease;
     }
     
     .modal-title {
@@ -388,7 +411,7 @@
       display: none;
     }
     
-    .toast.show { display: block; }
+    .toast.show { display: block; animation: fadeIn 0.2s ease; }
     
     .wa-btn {
       width: 100%;
@@ -428,7 +451,7 @@
     
     .close-btn:active { color: white; }
     
-    /* Form modal */
+    /* ==================== FORM DONASI ==================== */
     .amount-input {
       width: 100%;
       background: #2a2a2a;
@@ -500,7 +523,8 @@
       transform: scale(0.98);
     }
     
-    .hidden { display: none; }
+    /* ==================== UTILITY ==================== */
+    .hidden { display: none !important; }
   </style>
 </head>
 <body>
@@ -607,37 +631,76 @@
   
   <script>
     (function() {
-      const SUPABASE_URL = 'https://dkftqhkpwymbdtpznwto.supabase.co';
-      const SUPABASE_KEY = 'sb_publishable_Hlzx5XRu6hxnoxOCNKk7vg_9829kGve';
-      const PUBLIC_URL = 'https://start.progresix.site';
+      // ==================== KONFIGURASI ====================
+      const CONFIG = {
+        SUPABASE_URL: 'https://dkftqhkpwymbdtpznwto.supabase.co',
+        SUPABASE_KEY: 'sb_publishable_Hlzx5XRu6hxnoxOCNKk7vg_9829kGve',
+        PUBLIC_URL: 'https://start.progresix.site'
+      };
       
-      const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+      const supabaseClient = supabase.createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_KEY);
       
-      // Loading screen element
-      const loadingScreen = document.getElementById('loadingScreen');
+      // ==================== STATE ====================
+      const AppState = {
+        profile: {},
+        links: [],
+        loading: true
+      };
       
-      // Ikon hanya untuk platform terkenal - TIDAK ADA IKON GLOBE/DEFAULT
+      // ==================== UTILITAS ====================
+      const Utils = {
+        // Format mata uang
+        formatCurrency: (amount) => {
+          return new Intl.NumberFormat('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+          }).format(amount);
+        },
+        
+        // CRC16 untuk QRIS
+        crc16: (str) => {
+          let crc = 0xFFFF;
+          for (let i = 0; i < str.length; i++) {
+            crc ^= (str.charCodeAt(i) << 8);
+            for (let j = 0; j < 8; j++) {
+              if (crc & 0x8000) crc = (crc << 1) ^ 0x1021;
+              else crc = crc << 1;
+            }
+          }
+          return (crc & 0xFFFF).toString(16).toUpperCase().padStart(4, '0');
+        },
+        
+        // Generate QRIS
+        generateQRIS: (amount, canvas) => {
+          if (!amount || amount < 1000) amount = 1000;
+          const base = "00020101021126610014COM.GO-JEK.WWW01189360091439451776890210G9451776890303UMI51440014ID.CO.QRIS.WWW0215ID10254597029200303UMI520447895303360";
+          const suffix = "5802ID5925BAGUS ARDIANTO ADI SAPUTR6013KOTA SEMARANG61055011562070703A01";
+          const amtStr = amount.toString();
+          const tag = "54" + amtStr.length.toString().padStart(2, '0') + amtStr;
+          const full = base + tag + suffix + "6304";
+          QRCode.toCanvas(canvas, full + Utils.crc16(full), { width: 160, margin: 1 });
+        }
+      };
+      
+      // ==================== IKON ====================
       const Icons = {
-        github: '<svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>',
+        github: '<svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12z"/></svg>',
         youtube: '<svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>',
         tiktok: '<svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>',
         instagram: '<svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12s.014 3.667.072 4.947c.2 4.353 2.615 6.768 6.981 6.968 1.28.057 1.688.072 4.947.072s3.667-.015 4.947-.072c4.351-.2 6.768-2.614 6.968-6.981.058-1.28.072-1.688.072-4.947s-.015-3.667-.072-4.947c-.2-4.349-2.615-6.768-6.981-6.967C15.667.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4.162 4.162 0 1 1 0-8.324 4.162 4.162 0 0 1 0 8.324zM18.406 4.137a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>',
         whatsapp: '<svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>',
-        x: '<svg viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>',
+        x: '<svg viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298z"/></svg>',
         linkedin: '<svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>',
         telegram: '<svg viewBox="0 0 24 24"><path d="M11.944 0C5.346 0 0 5.346 0 11.944c0 6.598 5.346 11.944 11.944 11.944 6.598 0 11.944-5.346 11.944-11.944C23.888 5.346 18.542 0 11.944 0zm5.206 16.561c-.19.19-.44.285-.71.285-.27 0-.52-.095-.71-.285l-1.42-1.42-1.42 1.42c-.19.19-.44.285-.71.285-.27 0-.52-.095-.71-.285L10.55 15.141l-1.42 1.42c-.19.19-.44.285-.71.285-.27 0-.52-.095-.71-.285l-1.42-1.42c-.39-.39-.39-1.02 0-1.41l1.42-1.42-1.42-1.42c-.39-.39-.39-1.02 0-1.41l1.42-1.42c.19-.19.44-.285.71-.285.27 0 .52.095.71.285l1.42 1.42 1.42-1.42c.19-.19.44-.285.71-.285.27 0 .52.095.71.285l1.42 1.42 1.42-1.42c.39-.39 1.02-.39 1.41 0l1.42 1.42c.39.39.39 1.02 0 1.41l-1.42 1.42 1.42 1.42c.39.39.39 1.02 0 1.41l-1.42 1.42z"/></svg>',
         facebook: '<svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>'
-        // Ikon GLOBE DIHAPUS - tidak ada default icon
       };
       
-      // Fungsi untuk mendapatkan ikon berdasarkan URL
-      // Mengembalikan string kosong jika platform tidak dikenal
+      // Fungsi untuk mendapatkan ikon berdasarkan URL (kembalikan string kosong jika tidak dikenal)
       function getIcon(url) {
         if (!url) return '';
-        
         const l = url.toLowerCase();
-        
-        // Deteksi platform terkenal
         if (l.includes('instagram') || l.includes('instag')) return Icons.instagram;
         if (l.includes('github') || l.includes('gitlab')) return Icons.github;
         if (l.includes('twitter') || l.includes('x.com')) return Icons.x;
@@ -647,82 +710,60 @@
         if (l.includes('whatsapp') || l.includes('wa.me') || l.includes('whatsapp')) return Icons.whatsapp;
         if (l.includes('telegram') || l.includes('t.me')) return Icons.telegram;
         if (l.includes('facebook') || l.includes('fb.com')) return Icons.facebook;
-        
-        // Platform tidak dikenal - kembalikan string kosong (TIDAK ADA IKON)
-        return '';
+        return ''; // tidak dikenal -> tanpa ikon
       }
       
-      // DOM Elements
-      const bgDiv = document.getElementById('bg-image');
-      const avatarImg = document.getElementById('avatar');
-      const nameEl = document.getElementById('name');
-      const bioEl = document.getElementById('bio');
-      const socialContainer = document.getElementById('socialContainer');
-      const linksContainer = document.getElementById('linksContainer');
-      const yearSpan = document.getElementById('currentYear');
+      // ==================== ELEMEN DOM ====================
+      const elements = {
+        loading: document.getElementById('loadingScreen'),
+        bg: document.getElementById('bg-image'),
+        avatar: document.getElementById('avatar'),
+        name: document.getElementById('name'),
+        bio: document.getElementById('bio'),
+        social: document.getElementById('socialContainer'),
+        links: document.getElementById('linksContainer'),
+        year: document.getElementById('currentYear'),
+        shareModal: document.getElementById('shareModal'),
+        donateModal: document.getElementById('donateModal'),
+        shareBtn: document.getElementById('shareBtn'),
+        donateBtn: document.getElementById('donateBtn'),
+        closeShare: document.getElementById('closeShareBtn'),
+        closeDonate: document.getElementById('closeDonateBtn'),
+        copyUrl: document.getElementById('copyUrlBtn'),
+        shareUrl: document.getElementById('shareUrl'),
+        waShare: document.getElementById('waShareBtn'),
+        copyToast: document.getElementById('copyToast'),
+        qrisCanvas: document.getElementById('qrisCanvas'),
+        amountInput: document.getElementById('amountInput'),
+        amountOpts: document.querySelectorAll('.amount-opt'),
+        downloadQr: document.getElementById('downloadQrBtn')
+      };
       
-      const shareModal = document.getElementById('shareModal');
-      const donateModal = document.getElementById('donateModal');
-      const shareBtn = document.getElementById('shareBtn');
-      const donateBtn = document.getElementById('donateBtn');
-      const closeShareBtn = document.getElementById('closeShareBtn');
-      const closeDonateBtn = document.getElementById('closeDonateBtn');
-      const copyUrlBtn = document.getElementById('copyUrlBtn');
-      const shareUrl = document.getElementById('shareUrl');
-      const waShareBtn = document.getElementById('waShareBtn');
-      const copyToast = document.getElementById('copyToast');
-      
-      const qrisCanvas = document.getElementById('qrisCanvas');
-      const amountInput = document.getElementById('amountInput');
-      const amountOpts = document.querySelectorAll('.amount-opt');
-      const downloadQrBtn = document.getElementById('downloadQrBtn');
-      
-      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
-      
-      let profile = {};
-      let links = [];
-      
-      async function fetchData() {
-        try {
-          // Tampilkan loading screen
-          loadingScreen.classList.remove('hidden');
-          
-          const { data: prof } = await supabaseClient.from('profiles').select('*').limit(1).maybeSingle();
-          
-          if (prof) {
-            profile = prof;
-            nameEl.textContent = prof.name || 'Bagus Ardianto Adi Saputro';
-            bioEl.textContent = prof.bio || 'Digital Creator';
-            avatarImg.src = prof.avatar_url || 'https://ui-avatars.com/api/?name=Bagus+Ardianto&size=96&background=random';
-            if (prof.bg_url) {
-              bgDiv.style.backgroundImage = `url('${prof.bg_url}')`;
-            }
-            
-            const { data: lnks } = await supabaseClient.from('links').select('*').eq('user_id', prof.id).order('created_at', { ascending: false });
-            links = lnks || [];
-            renderLinks();
-          }
-          
-          // Sembunyikan loading screen setelah data siap
-          setTimeout(() => {
-            loadingScreen.classList.add('hidden');
-          }, 300);
-          
-        } catch (e) {
-          console.error('Error fetching data:', e);
-          loadingScreen.classList.add('hidden');
+      // ==================== RENDER ====================
+      function render() {
+        const { profile, links } = AppState;
+        
+        // Set tahun
+        if (elements.year) elements.year.textContent = new Date().getFullYear();
+        
+        // Profile
+        elements.name.textContent = profile.name || 'Bagus Ardianto Adi Saputro';
+        elements.bio.textContent = profile.bio || 'Digital Creator';
+        elements.avatar.src = profile.avatar_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(profile.name || 'Bagus Ardianto')}&size=96&background=random`;
+        if (profile.bg_url) {
+          elements.bg.style.backgroundImage = `url('${profile.bg_url}')`;
         }
-      }
-      
-      function renderLinks() {
-        socialContainer.innerHTML = '';
-        linksContainer.innerHTML = '';
         
+        // Reset containers
+        elements.social.innerHTML = '';
+        elements.links.innerHTML = '';
+        
+        // Render links
         links.forEach(link => {
+          const iconSvg = getIcon(link.url);
+          
           if (link.type === 'social') {
-            const iconSvg = getIcon(link.url);
-            
-            // Hanya tampilkan social link jika ada ikon (platform terkenal)
+            // Social link hanya jika punya ikon
             if (iconSvg) {
               const a = document.createElement('a');
               a.href = link.url;
@@ -730,111 +771,148 @@
               a.rel = 'noopener noreferrer';
               a.className = 'social-item';
               a.innerHTML = iconSvg;
-              socialContainer.appendChild(a);
+              elements.social.appendChild(a);
             }
-            // Jika tidak ada ikon, SKIP - tidak ditampilkan
           } else {
-            const iconSvg = getIcon(link.url);
-            
+            // Regular link
             const a = document.createElement('a');
             a.href = link.url;
             a.target = '_blank';
             a.rel = 'noopener noreferrer';
             a.className = 'link-card';
             
-            // Jika ada ikon, tampilkan dengan ikon
             if (iconSvg) {
-              a.innerHTML = `
-                ${iconSvg}
-                <span>${link.title || 'Link'}</span>
-              `;
+              a.innerHTML = `${iconSvg}<span>${link.title || 'Link'}</span>`;
             } else {
-              // Jika tidak ada ikon, tampilkan hanya teks (tanpa ikon)
-              a.innerHTML = `
-                <span style="margin-left: 0;">${link.title || 'Link'}</span>
-              `;
+              a.innerHTML = `<span style="margin-left:0;">${link.title || 'Link'}</span>`;
+              a.classList.add('no-icon');
             }
             
-            linksContainer.appendChild(a);
+            elements.links.appendChild(a);
           }
         });
       }
       
-      function crc16(str) {
-        let crc = 0xFFFF;
-        for (let i = 0; i < str.length; i++) {
-          crc ^= (str.charCodeAt(i) << 8);
-          for (let j = 0; j < 8; j++) {
-            if (crc & 0x8000) crc = (crc << 1) ^ 0x1021;
-            else crc = crc << 1;
+      // ==================== FETCH DATA ====================
+      async function fetchData() {
+        try {
+          // Ambil profile (asumsi hanya satu baris)
+          const { data: profile, error: profileErr } = await supabaseClient
+            .from('profiles')
+            .select('*')
+            .limit(1)
+            .maybeSingle();
+          
+          if (profileErr) throw profileErr;
+          
+          if (profile) {
+            AppState.profile = profile;
+            
+            // Ambil links milik user ini
+            // Coba urutkan berdasarkan kolom 'order' jika ada, fallback ke created_at
+            let { data: links, error: linksErr } = await supabaseClient
+              .from('links')
+              .select('*')
+              .eq('user_id', profile.id)
+              .order('order', { ascending: true, nullsFirst: false });
+            
+            // Jika error karena kolom order tidak ada, fallback ke created_at
+            if (linksErr && linksErr.message.includes('order')) {
+              console.warn('Kolom order tidak ditemukan, fallback ke created_at');
+              const { data: fallback, error: fallbackErr } = await supabaseClient
+                .from('links')
+                .select('*')
+                .eq('user_id', profile.id)
+                .order('created_at', { ascending: true });
+              
+              if (fallbackErr) throw fallbackErr;
+              links = fallback;
+            } else if (linksErr) {
+              throw linksErr;
+            }
+            
+            AppState.links = links || [];
           }
+          
+          render();
+        } catch (err) {
+          console.error('Gagal memuat data:', err);
+          // Tampilkan pesan error sederhana
+          elements.name.textContent = 'Error loading profile';
+          elements.bio.textContent = 'Silakan coba lagi nanti';
+        } finally {
+          // Sembunyikan loading
+          setTimeout(() => {
+            elements.loading.classList.add('hidden');
+          }, 300);
         }
-        return (crc & 0xFFFF).toString(16).toUpperCase().padStart(4, '0');
       }
       
-      function updateQRIS(amount) {
-        if (!amount || amount < 1000) amount = 1000;
-        const base = "00020101021126610014COM.GO-JEK.WWW01189360091439451776890210G9451776890303UMI51440014ID.CO.QRIS.WWW0215ID10254597029200303UMI520447895303360";
-        const suffix = "5802ID5925BAGUS ARDIANTO ADI SAPUTR6013KOTA SEMARANG61055011562070703A01";
-        const amtStr = amount.toString();
-        const tag = "54" + amtStr.length.toString().padStart(2, '0') + amtStr;
-        const full = base + tag + suffix + "6304";
-        QRCode.toCanvas(qrisCanvas, full + crc16(full), { width: 160, margin: 1 });
-      }
-      
-      shareBtn.onclick = () => shareModal.classList.add('show');
-      closeShareBtn.onclick = () => shareModal.classList.remove('show');
-      
-      donateBtn.onclick = () => {
-        donateModal.classList.add('show');
-        updateQRIS(5000);
-        amountOpts.forEach(opt => opt.classList.remove('active'));
-        document.querySelector('.amount-opt[data-amount="5000"]').classList.add('active');
-      };
-      closeDonateBtn.onclick = () => donateModal.classList.remove('show');
-      
-      copyUrlBtn.onclick = () => {
-        navigator.clipboard.writeText(PUBLIC_URL).then(() => {
-          copyToast.classList.add('show');
-          setTimeout(() => copyToast.classList.remove('show'), 1500);
-        }).catch(err => {
-          console.error('Copy failed:', err);
-          alert('Gagal menyalin link');
-        });
-      };
-      
-      amountOpts.forEach(btn => {
-        btn.onclick = () => {
-          amountOpts.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          amountInput.value = btn.dataset.amount;
-          updateQRIS(btn.dataset.amount);
+      // ==================== INISIALISASI MODAL ====================
+      function initModals() {
+        // Share modal
+        elements.shareBtn.onclick = () => elements.shareModal.classList.add('show');
+        elements.closeShare.onclick = () => elements.shareModal.classList.remove('show');
+        
+        // Donate modal
+        elements.donateBtn.onclick = () => {
+          elements.donateModal.classList.add('show');
+          // Set default amount 5000
+          elements.amountInput.value = 5000;
+          Utils.generateQRIS(5000, elements.qrisCanvas);
+          elements.amountOpts.forEach(opt => opt.classList.remove('active'));
+          document.querySelector('.amount-opt[data-amount="5000"]').classList.add('active');
         };
-      });
+        elements.closeDonate.onclick = () => elements.donateModal.classList.remove('show');
+        
+        // Copy URL
+        elements.copyUrl.onclick = () => {
+          navigator.clipboard.writeText(CONFIG.PUBLIC_URL).then(() => {
+            elements.copyToast.classList.add('show');
+            setTimeout(() => elements.copyToast.classList.remove('show'), 1500);
+          }).catch(() => alert('Gagal menyalin link'));
+        };
+        
+        // Pilih nominal
+        elements.amountOpts.forEach(btn => {
+          btn.onclick = () => {
+            elements.amountOpts.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const val = parseInt(btn.dataset.amount);
+            elements.amountInput.value = val;
+            Utils.generateQRIS(val, elements.qrisCanvas);
+          };
+        });
+        
+        // Input manual
+        elements.amountInput.oninput = (e) => {
+          const val = parseInt(e.target.value) || 0;
+          Utils.generateQRIS(val, elements.qrisCanvas);
+          elements.amountOpts.forEach(b => b.classList.remove('active'));
+        };
+        
+        // Download QR
+        elements.downloadQr.onclick = () => {
+          const canvas = elements.qrisCanvas;
+          const link = document.createElement('a');
+          link.download = 'qris-bardianto.png';
+          link.href = canvas.toDataURL();
+          link.click();
+        };
+        
+        // Tutup modal jika klik backdrop
+        window.onclick = (e) => {
+          if (e.target === elements.shareModal) elements.shareModal.classList.remove('show');
+          if (e.target === elements.donateModal) elements.donateModal.classList.remove('show');
+        };
+        
+        // Set link WA share
+        elements.waShare.href = `https://wa.me/?text=${encodeURIComponent('Lihat profil Bagus Ardianto: ' + CONFIG.PUBLIC_URL)}`;
+        elements.shareUrl.textContent = CONFIG.PUBLIC_URL;
+      }
       
-      amountInput.oninput = (e) => {
-        const val = parseInt(e.target.value) || 0;
-        updateQRIS(val);
-        amountOpts.forEach(b => b.classList.remove('active'));
-      };
-      
-      downloadQrBtn.onclick = () => {
-        const canvas = qrisCanvas;
-        const link = document.createElement('a');
-        link.download = 'qris-bardianto.png';
-        link.href = canvas.toDataURL();
-        link.click();
-      };
-      
-      window.onclick = (e) => {
-        if (e.target === shareModal) shareModal.classList.remove('show');
-        if (e.target === donateModal) donateModal.classList.remove('show');
-      };
-      
-      waShareBtn.href = `https://wa.me/?text=${encodeURIComponent('Lihat profil Bagus Ardianto: ' + PUBLIC_URL)}`;
-      shareUrl.textContent = PUBLIC_URL;
-      
-      // Mulai fetch data
+      // ==================== MULAI ====================
+      initModals();
       fetchData();
     })();
   </script>
