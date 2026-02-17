@@ -8,7 +8,6 @@
   <!-- Ikon lokal di root -->
   <link rel="icon" type="image/png" href="/pavicon-512x512.png">
   
-  <!-- Font system-ui untuk performa -->
   <style>
     /* ==================== RESET & DASAR ==================== */
     * { 
@@ -16,10 +15,13 @@
       padding: 0; 
       box-sizing: border-box; 
       -webkit-tap-highlight-color: transparent;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
+    }
+    
+    html, body {
+      height: 100%;
+      width: 100%;
+      overflow: hidden; /* Mencegah scroll ganda */
+      position: fixed; /* Fix untuk iOS */
     }
     
     body { 
@@ -30,28 +32,79 @@
       -webkit-font-smoothing: antialiased;
     }
     
-    /* ==================== BACKGROUND ==================== */
+    /* ==================== BACKGROUND FIXED ==================== */
+    .fixed-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+      transform: translate3d(0, 0, 0); /* GPU acceleration */
+      -webkit-transform: translate3d(0, 0, 0);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      perspective: 1000;
+      -webkit-perspective: 1000;
+    }
+    
     #bg-image { 
-      position: fixed; 
-      inset: 0; 
+      position: absolute;
+      inset: 0;
       background-size: cover; 
       background-position: center; 
-      z-index: 1;
-      will-change: transform;
       transition: background-image 0.3s ease;
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
     }
     
     .bg-overlay {
-      position: fixed;
+      position: absolute;
       inset: 0;
       background: rgba(0, 0, 0, 0.65);
-      z-index: 2;
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
     }
     
-    /* ==================== KONTAINER UTAMA ==================== */
-    .container {
+    /* ==================== SCROLLABLE CONTENT ==================== */
+    .scroll-wrapper {
       position: relative;
       z-index: 10;
+      height: 100vh;
+      width: 100vw;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch; /* Smooth scroll di iOS */
+      scroll-behavior: smooth;
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+    }
+    
+    /* Optimasi scroll dengan pointer-events */
+    .scroll-wrapper > * {
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+    }
+    
+    /* Membuat scrollbar lebih tipis dan transparan */
+    .scroll-wrapper::-webkit-scrollbar {
+      width: 3px;
+    }
+    
+    .scroll-wrapper::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    
+    .scroll-wrapper::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+    }
+    
+    .scroll-wrapper::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+    
+    .container {
       max-width: 420px;
       margin: 0 auto;
       padding: 16px 16px 24px;
@@ -59,6 +112,21 @@
       display: flex;
       flex-direction: column;
       animation: fadeIn 0.5s ease;
+    }
+    
+    /* ==================== ANIMASI ==================== */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes scaleIn {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
     
     /* ==================== LOADING SCREEN ==================== */
@@ -87,21 +155,6 @@
       animation: spin 0.8s linear infinite;
     }
     
-    /* ==================== ANIMASI ==================== */
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-    
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    @keyframes scaleIn {
-      from { transform: scale(0.95); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-    
     /* ==================== SHARE BUTTON ==================== */
     .share-btn {
       display: flex;
@@ -122,10 +175,8 @@
       gap: 8px;
       transition: background 0.2s, transform 0.1s;
       cursor: pointer;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
     }
     
     .share-btn button:active {
@@ -150,8 +201,8 @@
       object-fit: cover;
       margin: 0 auto 12px;
       display: block;
-      pointer-events: none;
       animation: scaleIn 0.4s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     }
     
     /* ==================== NAMA & BIO ==================== */
@@ -196,6 +247,8 @@
       color: white;
       transition: background 0.15s, transform 0.1s;
       text-decoration: none;
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
     }
     
     .social-item:active {
@@ -235,6 +288,8 @@
       will-change: transform;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
       animation: fadeIn 0.3s ease;
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
     }
     
     .link-card:active {
@@ -307,6 +362,7 @@
       font-weight: 500;
       letter-spacing: 0.5px;
       margin-top: auto;
+      padding: 16px 0 8px;
     }
     
     /* ==================== MODAL ==================== */
@@ -325,11 +381,13 @@
       position: fixed;
       inset: 0;
       background: rgba(0, 0, 0, 0.8);
-      z-index: 100;
+      z-index: 200;
       display: none;
       align-items: center;
       justify-content: center;
       padding: 20px;
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
     }
     
     .modal.show { display: flex; }
@@ -343,6 +401,7 @@
       color: white;
       border: 1px solid #333;
       animation: scaleIn 0.3s ease;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
     }
     
     .modal-title {
@@ -409,6 +468,7 @@
       font-weight: 500;
       white-space: nowrap;
       display: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
     
     .toast.show { display: block; animation: fadeIn 0.2s ease; }
@@ -431,7 +491,7 @@
       cursor: pointer;
     }
     
-    .wa-btn:active { opacity: 0.8; }
+    .wa-btn:active { opacity: 0.8; transform: scale(0.98); }
     .wa-btn svg {
       width: 18px;
       height: 18px;
@@ -528,54 +588,59 @@
   </style>
 </head>
 <body>
+  <!-- BACKGROUND FIXED -->
+  <div class="fixed-bg">
+    <div id="bg-image"></div>
+    <div class="bg-overlay"></div>
+  </div>
+  
   <!-- LOADING SCREEN -->
   <div id="loadingScreen" class="loading-screen">
     <div class="loading-spinner"></div>
   </div>
   
-  <!-- Background dari admin -->
-  <div id="bg-image"></div>
-  <div class="bg-overlay"></div>
-  
-  <div class="container">
-    
-    <!-- Share button -->
-    <div class="share-btn">
-      <button id="shareBtn">
+  <!-- SCROLLABLE CONTENT -->
+  <div class="scroll-wrapper">
+    <div class="container">
+      
+      <!-- Share button -->
+      <div class="share-btn">
+        <button id="shareBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="18" cy="5" r="3"/>
+            <circle cx="6" cy="12" r="3"/>
+            <circle cx="18" cy="19" r="3"/>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+          </svg>
+          Share
+        </button>
+      </div>
+      
+      <!-- Profile -->
+      <img id="avatar" class="avatar" src="" alt="avatar">
+      <h1 id="name" class="name"></h1>
+      <p id="bio" class="bio"></p>
+      
+      <!-- Social links -->
+      <div id="socialContainer" class="social-grid"></div>
+      
+      <!-- Link cards -->
+      <div id="linksContainer" class="links-grid"></div>
+      
+      <!-- Donate button -->
+      <button id="donateBtn" class="donate-btn">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="18" cy="5" r="3"/>
-          <circle cx="6" cy="12" r="3"/>
-          <circle cx="18" cy="19" r="3"/>
-          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
-          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+          <path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"/>
+          <path d="M4 6v12c0 1.1.9 2 2 2h14v-4"/>
+          <path d="M18 12a2 2 0 0 0-2 2c0 1.1.9 2 2 2h4v-4h-4z"/>
         </svg>
-        Share
+        Traktir Kopi
       </button>
+      
+      <!-- Footer -->
+      <div class="footer">© <span id="currentYear"></span> BAGUS ARDIANTO</div>
     </div>
-    
-    <!-- Profile -->
-    <img id="avatar" class="avatar" src="" alt="avatar">
-    <h1 id="name" class="name"></h1>
-    <p id="bio" class="bio"></p>
-    
-    <!-- Social links - Hanya platform terkenal -->
-    <div id="socialContainer" class="social-grid"></div>
-    
-    <!-- Link cards - Ikon hanya untuk platform terkenal -->
-    <div id="linksContainer" class="links-grid"></div>
-    
-    <!-- Donate button -->
-    <button id="donateBtn" class="donate-btn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"/>
-        <path d="M4 6v12c0 1.1.9 2 2 2h14v-4"/>
-        <path d="M18 12a2 2 0 0 0-2 2c0 1.1.9 2 2 2h4v-4h-4z"/>
-      </svg>
-      Traktir Kopi
-    </button>
-    
-    <!-- Footer -->
-    <div class="footer">© <span id="currentYear"></span> BAGUS ARDIANTO</div>
   </div>
   
   <!-- MODAL SHARE -->
@@ -631,6 +696,8 @@
   
   <script>
     (function() {
+      'use strict';
+      
       // ==================== KONFIGURASI ====================
       const CONFIG = {
         SUPABASE_URL: 'https://dkftqhkpwymbdtpznwto.supabase.co',
@@ -649,7 +716,6 @@
       
       // ==================== UTILITAS ====================
       const Utils = {
-        // Format mata uang
         formatCurrency: (amount) => {
           return new Intl.NumberFormat('id-ID', {
             style: 'currency',
@@ -659,7 +725,11 @@
           }).format(amount);
         },
         
-        // CRC16 untuk QRIS
+        formatFileName: (amount) => {
+          // Format: qris-5000.png atau qris-10000.png
+          return `qris-${amount}.png`;
+        },
+        
         crc16: (str) => {
           let crc = 0xFFFF;
           for (let i = 0; i < str.length; i++) {
@@ -672,7 +742,6 @@
           return (crc & 0xFFFF).toString(16).toUpperCase().padStart(4, '0');
         },
         
-        // Generate QRIS
         generateQRIS: (amount, canvas) => {
           if (!amount || amount < 1000) amount = 1000;
           const base = "00020101021126610014COM.GO-JEK.WWW01189360091439451776890210G9451776890303UMI51440014ID.CO.QRIS.WWW0215ID10254597029200303UMI520447895303360";
@@ -697,7 +766,6 @@
         facebook: '<svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>'
       };
       
-      // Fungsi untuk mendapatkan ikon berdasarkan URL (kembalikan string kosong jika tidak dikenal)
       function getIcon(url) {
         if (!url) return '';
         const l = url.toLowerCase();
@@ -710,7 +778,7 @@
         if (l.includes('whatsapp') || l.includes('wa.me') || l.includes('whatsapp')) return Icons.whatsapp;
         if (l.includes('telegram') || l.includes('t.me')) return Icons.telegram;
         if (l.includes('facebook') || l.includes('fb.com')) return Icons.facebook;
-        return ''; // tidak dikenal -> tanpa ikon
+        return '';
       }
       
       // ==================== ELEMEN DOM ====================
@@ -743,27 +811,23 @@
       function render() {
         const { profile, links } = AppState;
         
-        // Set tahun
         if (elements.year) elements.year.textContent = new Date().getFullYear();
         
-        // Profile
         elements.name.textContent = profile.name || 'Bagus Ardianto Adi Saputro';
         elements.bio.textContent = profile.bio || 'Digital Creator';
         elements.avatar.src = profile.avatar_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(profile.name || 'Bagus Ardianto')}&size=96&background=random`;
+        
         if (profile.bg_url) {
           elements.bg.style.backgroundImage = `url('${profile.bg_url}')`;
         }
         
-        // Reset containers
         elements.social.innerHTML = '';
         elements.links.innerHTML = '';
         
-        // Render links
         links.forEach(link => {
           const iconSvg = getIcon(link.url);
           
           if (link.type === 'social') {
-            // Social link hanya jika punya ikon
             if (iconSvg) {
               const a = document.createElement('a');
               a.href = link.url;
@@ -774,7 +838,6 @@
               elements.social.appendChild(a);
             }
           } else {
-            // Regular link
             const a = document.createElement('a');
             a.href = link.url;
             a.target = '_blank';
@@ -796,7 +859,6 @@
       // ==================== FETCH DATA ====================
       async function fetchData() {
         try {
-          // Ambil profile (asumsi hanya satu baris)
           const { data: profile, error: profileErr } = await supabaseClient
             .from('profiles')
             .select('*')
@@ -808,15 +870,12 @@
           if (profile) {
             AppState.profile = profile;
             
-            // Ambil links milik user ini
-            // Coba urutkan berdasarkan kolom 'order' jika ada, fallback ke created_at
             let { data: links, error: linksErr } = await supabaseClient
               .from('links')
               .select('*')
               .eq('user_id', profile.id)
               .order('order', { ascending: true, nullsFirst: false });
             
-            // Jika error karena kolom order tidak ada, fallback ke created_at
             if (linksErr && linksErr.message.includes('order')) {
               console.warn('Kolom order tidak ditemukan, fallback ke created_at');
               const { data: fallback, error: fallbackErr } = await supabaseClient
@@ -837,11 +896,9 @@
           render();
         } catch (err) {
           console.error('Gagal memuat data:', err);
-          // Tampilkan pesan error sederhana
           elements.name.textContent = 'Error loading profile';
           elements.bio.textContent = 'Silakan coba lagi nanti';
         } finally {
-          // Sembunyikan loading
           setTimeout(() => {
             elements.loading.classList.add('hidden');
           }, 300);
@@ -850,14 +907,11 @@
       
       // ==================== INISIALISASI MODAL ====================
       function initModals() {
-        // Share modal
         elements.shareBtn.onclick = () => elements.shareModal.classList.add('show');
         elements.closeShare.onclick = () => elements.shareModal.classList.remove('show');
         
-        // Donate modal
         elements.donateBtn.onclick = () => {
           elements.donateModal.classList.add('show');
-          // Set default amount 5000
           elements.amountInput.value = 5000;
           Utils.generateQRIS(5000, elements.qrisCanvas);
           elements.amountOpts.forEach(opt => opt.classList.remove('active'));
@@ -865,7 +919,6 @@
         };
         elements.closeDonate.onclick = () => elements.donateModal.classList.remove('show');
         
-        // Copy URL
         elements.copyUrl.onclick = () => {
           navigator.clipboard.writeText(CONFIG.PUBLIC_URL).then(() => {
             elements.copyToast.classList.add('show');
@@ -873,7 +926,6 @@
           }).catch(() => alert('Gagal menyalin link'));
         };
         
-        // Pilih nominal
         elements.amountOpts.forEach(btn => {
           btn.onclick = () => {
             elements.amountOpts.forEach(b => b.classList.remove('active'));
@@ -884,34 +936,31 @@
           };
         });
         
-        // Input manual
         elements.amountInput.oninput = (e) => {
           const val = parseInt(e.target.value) || 0;
           Utils.generateQRIS(val, elements.qrisCanvas);
           elements.amountOpts.forEach(b => b.classList.remove('active'));
         };
         
-        // Download QR
+        // PERBAIKAN: Download QR dengan format nama qris-nominal.png
         elements.downloadQr.onclick = () => {
           const canvas = elements.qrisCanvas;
+          const amount = elements.amountInput.value || '5000';
           const link = document.createElement('a');
-          link.download = 'qris-bardianto.png';
-          link.href = canvas.toDataURL();
+          link.download = Utils.formatFileName(amount); // Format: qris-5000.png
+          link.href = canvas.toDataURL('image/png');
           link.click();
         };
         
-        // Tutup modal jika klik backdrop
         window.onclick = (e) => {
           if (e.target === elements.shareModal) elements.shareModal.classList.remove('show');
           if (e.target === elements.donateModal) elements.donateModal.classList.remove('show');
         };
         
-        // Set link WA share
         elements.waShare.href = `https://wa.me/?text=${encodeURIComponent('Lihat profil Bagus Ardianto: ' + CONFIG.PUBLIC_URL)}`;
         elements.shareUrl.textContent = CONFIG.PUBLIC_URL;
       }
       
-      // ==================== MULAI ====================
       initModals();
       fetchData();
     })();
